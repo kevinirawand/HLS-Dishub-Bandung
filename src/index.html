@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>RTSP Dishub Bandung</title>
+</head>
+<body>
+
+   <!-- <script src="assets/jsmpeg/jsmpeg.min.js"></script>
+   
+   <div class="jsmpeg" data-url="blob:https://atcs-dishub.bandung.go.id/b21b366c-c2b0-41d8-88ff-21977be796ad"></div> -->
+
+   <video-js id=vid1 width=600 height=300 class="vjs-default-skin" controls>
+      <source>
+    </video-js>
+    <script src="video.js"></script>
+    <script src="videojs-http-streaming.min.js"></script>
+    <script>
+    var player = videojs('vid1');
+    player.play();
+
+    player.src({
+  src: 'https://atcs-dishub.bandung.go.id:1990/Samsat/index.m3u8',
+  type: 'application/x-mpegURL',
+  withCredentials: true
+});
+    </script>
+</body>
+</html>

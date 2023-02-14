@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>HLS TESTING</title>
+</head>
+
+<body>
+   <video id="video" width="500" height="500" controls></video>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.8.2/hls.min.js"></script>
+
+
+   <script>
+      const videoSrc = '/videos/output.m3u8';
+
+      // if(Hls.isSupported()) {
+      //    const hls = new Hls();
+
+      //    hls.loadSource(videoSrc);
+      //    hls.attachMedia(video);
+      //    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      //       video.play();
+      //    });
+      // } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      //    video.src = videoSrc;
+      //    video.addEventListener('loadedmetadata', () => {
+      //       video.play();
+      //    });
+      // }
+
+      $.ajax({
+         type: "GET",
+         headers: {
+            'Content-Type': 'application / x -mpegURL',
+            'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Origin': "*",
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods': 'PUT, GET, HEAD, POST, DELETE, OPTIONS'
+         },
+         beforeSend: function (request) {
+            request.setRequestHeader("Content-Type", 'application/x-mpegURL');
+            request.setRequestHeader("Access-Control-Allow-Credentials", true);
+            request.setRequestHeader("Access-Control-Allow-Origin", '*');
+            request.setRequestHeader("Access-Control-Allow-Headers", 'Content-Type');
+            request.setRequestHeader("Access-Control-Allow-Methods", 'PUT, GET, HEAD, POST, DELETE, OPTIONS');
+         },
+         url: "https://atcs-dishub.bandung.go.id:1990/Buahbatu/index.m3u8",
+         processData: false,
+         success: function (data) {
+            alert(data)
+            if (Hls.isSupported) {
+               const video = document.getElementById('video');
+
+               const hls = new Hls();
+               hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                  console.log('video and hls.js are now bound together !');
+               });
+               hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                  console.log(
+                     'manifest loaded, found ' + data.levels.length + ' quality level'
+                  );
+               });
+               hls.loadSource('https://atcs-dishub.bandung.go.id:1990/Buahbatu/index.m3u8');
+               // bind them together
+               hls.attachMedia(video);
+            }
+         }
+      });
+   </script>
+</body>
+
+</html>

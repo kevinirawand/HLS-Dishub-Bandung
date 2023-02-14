@@ -1,0 +1,6 @@
+GET https://atcs-dishub.bandung.go.id:1990/Buahbatu/index.m3u8
+Content-Type: application/x-mpegURL
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: '*'
+Access-Control-Allow-Headers: 'Content-Type'
+Access-Control-Allow-Methods: 'PUT, GET, HEAD, POST, DELETE, OPTIONS'
